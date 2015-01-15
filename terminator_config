@@ -1,0 +1,22 @@
+[global_config]
+[keybindings]
+  broadcast_all = <Primary>g
+  split_horiz = <Primary>1
+  split_vert = <Primary>2
+  broadcast_off = <Primary><Shift>g
+[profiles]
+  [[default]]
+    background_darkness = 0.8
+    background_image = None
+    scroll_on_output = False
+    background_type = transparent
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
