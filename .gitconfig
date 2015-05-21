@@ -1,3 +1,16 @@
 [user]
-	email = info@davidfarrington.co.uk
-	name = David Farrington
+  email = info@davidfarrington.co.uk
+  name = David Farrington
+[alias]
+  dish = diff --staged
+  hash = rev-parse --short HEAD
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+  alias = config --get-regexp alias
+[push]
+	default = simple

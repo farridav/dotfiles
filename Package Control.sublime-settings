@@ -2,17 +2,14 @@
 	"in_process_packages":
 	[
 	],
-	"installed_dependencies":
-	[
-		"0_package_control_loader",
-		"bz2",
-		"ssl-linux"
-	],
 	"installed_packages":
 	[
 		"Anaconda",
 		"Ansible",
+		"AutoSpell",
+		"ColorSchemeSelector",
 		"Djaneiro",
+		"DjangoNoseTestRunner",
 		"Git",
 		"GitGutter",
 		"GitHubinator",
@@ -20,9 +17,17 @@
 		"Jinja2",
 		"Package Control",
 		"Pretty JSON",
+		"Python Auto-Complete",
+		"Python Fix Imports",
+		"Python Nose Testing Snippets",
+		"Python Output Format",
+		"PythonTest",
 		"requirementstxt",
 		"SideBarEnhancements",
+		"SortBy",
+		"SuperPython",
 		"Tag",
+		"Theme - Cobalt2",
 		"Theme - Soda"
 	]
 }
