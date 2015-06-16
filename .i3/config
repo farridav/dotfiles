@@ -92,6 +92,8 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+popup_during_fullscreen smart
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -166,3 +168,6 @@ exec setxkbmap gb
 
 # Lock screen
 bindsym $mod+l exec gnome-screensaver-command -l
+
+# Increase screensaver timeout to 40 mins
+exec --no-startup-id xset dpms 2400
