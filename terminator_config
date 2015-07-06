@@ -12,14 +12,17 @@
     background_type = transparent
     foreground_color = "#839496"
     scroll_on_output = False
+    show_titlebar = False
     background_color = "#002b36"
     scrollback_infinite = True
   [[white]]
+    scrollbar_position = hidden
     use_system_font = False
     background_darkness = 0.8
     background_type = transparent
     background_image = None
     foreground_color = "#000000"
+    show_titlebar = False
     background_color = "#ffffff"
 [layouts]
   [[default]]

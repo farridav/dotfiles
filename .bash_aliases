@@ -96,3 +96,6 @@ new_branch () {
   git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
   git checkout -b $1
 }
+
+
+alias video='totem $1 &> /dev/null'
