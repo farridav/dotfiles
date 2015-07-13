@@ -16,6 +16,7 @@ alias e='. .venv/bin/activate'
 alias tsr='./manage.py test --settings=rbx.settings.test'
 alias cdk='cd ~/workspace/keymanager && . .venv/bin/activate'
 alias cdd='cd ~/workspace/davidfarrington && . .venv/bin/activate'
+alias cdf='cd ~/workspace/famous && . .venv/bin/activate'
 
 export PATH=${PATH}:/usr/local/bin
 export PATH=${PATH}:LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
@@ -26,27 +27,27 @@ parse_git_remote () {
     git ls-remote --get-url 2> /dev/null | sed s/git@github.com:/https\:\\/\\/github.com\\// | sed s/.git$//
 }
 
-RBX_REPOS='/home/david/workspace/rockabox'
+SCOOTA_REPOS='/home/david/workspace/scootagroup'
 ANXS_REPOS='/home/david/workspace/ANXS'
 
-cdr () {
+cds () {
     if [[ -z "$1" ]]
     then
-        cd $RBX_REPOS/rbx && . .venv/bin/activate
+        cd $SCOOTA_REPOS/scoota && . .venv/bin/activate
     else
-        cd $RBX_REPOS/$1 && . .venv/bin/activate
+        cd $SCOOTA_REPOS/$1 && . .venv/bin/activate
     fi
 }
 
-_cdr_completion() {
+_cds_completion() {
     COMPREPLY=()
     local cur projects
-    projects=$(ls $RBX_REPOS 2>/dev/null)
+    projects=$(ls $SCOOTA_REPOS 2>/dev/null)
     _get_comp_words_by_ref cur
     COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
 }
 
-complete -F _cdr_completion cdr
+complete -F _cds_completion cds
 
 cda () {
     if [[ -z "$1" ]]
