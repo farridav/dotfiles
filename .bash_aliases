@@ -84,7 +84,7 @@ alias lwrjpg='for i in *.JPG; do mv $i ${i/%JPG/jpg} ;done'
 alias replacer='for i in * ; do j=`echo $i | sed 's/find/replace/g' - ` ; mv "$i" "$j" ; done'
 alias webperms='find . -type d -exec chmod u=rwx,g=rx,o= {} \; && find . -type f -exec chmod u=rw,g=r,o= {} \;'
 alias venv='virtualenv .venv && . .venv/bin/activate'
-alias sync='rsync -avz --exclude .git --exclude .venv desktop:`pwd`/ `pwd`/'
+alias sync='rsync -avz --exclude .git --exclude .venv ultra:`pwd`/ `pwd`/'
 alias video='totem $1 &> /dev/null'
 alias dev='tmux new-session -A -s dev'
 alias grep='grep --color=auto'
@@ -111,7 +111,6 @@ alias prs='xdg-open $(parse_git_remote)/pulls 2> /dev/null'
 
 # Open up a compare in github with this branch and develop, ready for PR creation
 alias pr='xdg-open $(parse_git_remote)/compare/develop...$(git rev-parse --abbrev-ref HEAD) 2> /dev/null'
-
 
 #####################
 # Exports variables #

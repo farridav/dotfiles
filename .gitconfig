@@ -20,7 +20,7 @@
 	cb = "! git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	fu = "! git commit -a --fixup HEAD && git push origin $\\(git rev-parse --abbrev-ref HEAD\\)"
 	am = "! git add -u && git commit --amend && git push origin $\\(git rev-parse --abbrev-ref HEAD\\) --force"
-
+	boo = "!func(){ git add -u && git commit --amend && git push origin --force; }; func"
 [push]
 	default = current
 
