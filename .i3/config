@@ -162,7 +162,7 @@ bindsym $mod+l exec gnome-screensaver-command -l
 exec --no-startup-id xset dpms 2400
 
 # Watch our battery
-exec_always sudo /home/david/workspace/dotfiles/.i3/battery-indicator
+exec_always sudo ./battery-indicator
 
 # Dont change focus with the mouse
 focus_follows_mouse no

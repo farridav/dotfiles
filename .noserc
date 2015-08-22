@@ -1,11 +1,11 @@
 [nosetests]
 with-progressive=1
+processes=-1
 with-yanc=1
 nocapture=1
 nologcapture=1
 with-id=1
 failed=1
 verbosity=1
-processes=-1
 logging-level=0
 logging-clear-handlers=1

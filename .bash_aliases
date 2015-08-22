@@ -18,6 +18,9 @@ alias cdk='cd ~/workspace/keymanager && . .venv/bin/activate'
 alias cdd='cd ~/workspace/davidfarrington && . .venv/bin/activate'
 alias cdf='cd ~/workspace/famous && . .venv/bin/activate'
 
+# Grep for python projects
+alias pygrep='grep -rn --exclude-dir .venv --exclude-dir .git --exclude *.pyc'
+
 export PATH=${PATH}:/usr/local/bin
 export PATH=${PATH}:LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export PATH=${PATH}:/opt/vagrant/bin
@@ -28,14 +31,18 @@ parse_git_remote () {
 }
 
 SCOOTA_REPOS='/home/david/workspace/scootagroup'
+RBX_REPOS='/home/david/workspace/rockabox/'
 ANXS_REPOS='/home/david/workspace/ANXS'
 
 cds () {
     if [[ -z "$1" ]]
     then
-        cd $SCOOTA_REPOS/scoota && . .venv/bin/activate
+        cd $SCOOTA_REPOS/scoota
     else
-        cd $SCOOTA_REPOS/$1 && . .venv/bin/activate
+        cd $SCOOTA_REPOS/$1
+    fi
+    if [ -f .venv/bin/activate ]; then
+	. .venv/bin/activate
     fi
 }
 
@@ -68,6 +75,23 @@ _cda_completion() {
 
 complete -F _cda_completion cda
 
+cdr () {
+    cd $RBX_REPOS/$1
+    if [ -f .venv/bin/activate ]; then
+	. .venv/bin/activate
+    fi
+}
+
+_cdr_completion() {
+    COMPREPLY=()
+    local cur projects
+    projects=$(ls $RBX_REPOS 2>/dev/null)
+    _get_comp_words_by_ref cur
+    COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
+}
+
+complete -F _cdr_completion cdr
+
 kill_port () {
   killport='sudo fuser -k $1/tcp'
 }
@@ -85,7 +109,8 @@ alias pr='firefox $(parse_git_remote)/compare/develop...$(git rev-parse --abbrev
 alias prs='xdg-open $(parse_git_remote)/pulls 2> /dev/null'
 
 # Amend the last commit and re-push this branch
-alias ga='git add -u && git commit --amend && git push origin $(git rev-parse --abbrev-ref HEAD) --force'
+alias ga='git commit -a --fixup HEAD && git push origin $(git rev-parse --abbrev-ref HEAD)'
+#alias ga='git add -u && git commit --amend && git push origin $(git rev-parse --abbrev-ref HEAD) --force'
 
 alias venv='virtualenv .venv && . .venv/bin/activate'
 
