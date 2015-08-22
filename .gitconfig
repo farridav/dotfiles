@@ -16,7 +16,11 @@
 	alias = config --get-regexp alias
 	squash = rebase -i origin/develop
 	udiff = diff HEAD...origin/develop
-	
+	rs = "! git fetch -p && git reset --hard origin/$\\(git rev-parse --abbrev-ref HEAD\\)"
+	cb = "! git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	fu = "! git commit -a --fixup HEAD && git push origin $\\(git rev-parse --abbrev-ref HEAD\\)"
+	am = "! git add -u && git commit --amend && git push origin $\\(git rev-parse --abbrev-ref HEAD\\) --force"
+
 [push]
 	default = current
 
