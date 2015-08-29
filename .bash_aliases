@@ -88,6 +88,7 @@ alias sync='rsync -avz --exclude .git --exclude .venv ultra:`pwd`/ `pwd`/'
 alias video='totem $1 &> /dev/null'
 alias dev='tmux new-session -A -s dev'
 alias grep='grep --color=auto'
+alias clean='find -name *~ -delete && find -name *.pyc -delete'
 
 # ls aliases
 alias l='ls -1 --color=auto'
@@ -105,6 +106,8 @@ alias cdf='cd ~/workspace/famous && . .venv/bin/activate'
 
 # Grep for python projects
 alias pygrep='grep -rn --exclude-dir .venv --exclude-dir .git --exclude *.pyc'
+# global find and replace
+alias greplace='grep -Irl "$1" | xargs sed -i "s/$1/$2/g"'
 
 # View all Pr's on this repo, in github
 alias prs='xdg-open $(parse_git_remote)/pulls 2> /dev/null'
