@@ -89,6 +89,7 @@ alias video='totem $1 &> /dev/null'
 alias dev='tmux new-session -A -s dev'
 alias grep='grep --color=auto'
 alias clean='find -name *~ -delete && find -name *.pyc -delete'
+alias clipboard='xclip -sel clip'
 
 # ls aliases
 alias l='ls -1 --color=auto'
