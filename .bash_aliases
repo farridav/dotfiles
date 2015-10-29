@@ -90,6 +90,7 @@ alias dev='tmux new-session -A -s dev'
 alias grep='grep --color=auto'
 alias clean='find -name *~ -delete && find -name *.pyc -delete'
 alias clipboard='xclip -sel clip'
+alias terraform_graph='terraform graph | dot -Tpng > /tmp/graph.png && xdg-open /tmp/graph.png'
 
 # ls aliases
 alias l='ls -1 --color=auto'
@@ -99,7 +100,7 @@ alias ls='ls --color=auto'
 alias l='ls -CF'
 
 # work aliases
-alias e='. .venv/bin/activate'
+alias e='if [ -d .venv ]; then . .venv/bin/activate; fi'
 alias tsr='./manage.py test --settings=rbx.settings.test'
 alias cdk='cd ~/workspace/keymanager && . .venv/bin/activate'
 alias cdd='cd ~/workspace/davidfarrington && . .venv/bin/activate'
