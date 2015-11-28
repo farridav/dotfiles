@@ -21,17 +21,23 @@ cds () {
     then
         cd $SCOOTA_REPOS/scoota
     else
-        cd $SCOOTA_REPOS/$1
+        if [ -d $SCOOTA_REPOS/scoota_$1 ];
+        then
+           cd $SCOOTA_REPOS/scoota_$1
+        else
+           cd $SCOOTA_REPOS/$1
+        fi
     fi
+
     if [ -f .venv/bin/activate ]; then
-	. .venv/bin/activate
+	    . .venv/bin/activate
     fi
 }
 
 _cds_completion() {
     COMPREPLY=()
     local cur projects
-    projects=$(ls $SCOOTA_REPOS 2>/dev/null)
+    projects=$(ls $SCOOTA_REPOS | sed s/scoota_//g 2>/dev/null)
     _get_comp_words_by_ref cur
     COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
 }
