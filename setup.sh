@@ -13,3 +13,7 @@ delete_and_link .gitignore ~/.gitignore
 delete_and_link .noserc ~/.noserc
 delete_and_link .tmux.conf ~/.tmux.conf
 delete_and_link init.el ~/.emacs.d/init.el
+delete_and_link uzbl.conf  ~/.config/uzbl/config
+
+# Shortcut uzbl to www
+sudo ln -sf /usr/bin/uzbl-tabbed /usr/bin/www

@@ -81,6 +81,15 @@ parse_git_remote () {
     git ls-remote --get-url 2> /dev/null | sed s/git@github.com:/https\:\\/\\/github.com\\// | sed s/.git$//
 }
 
+# use with pr_review https://github.com/rockabox/rbx_campaigns/pull/543
+pr_review () {
+    host="$1"
+    pr="$2"
+    project=$(echo $pr | sed s/.*rbx_//g | sed s/\\/.*//g)
+
+    ssh $host 'zenity --display :0 --question --title "PR Merge Request" --text "Hi $host, Can you merge my $project pr?" && if [ $? -eq "0" ]; then xdg-open $pr; fi;'
+}
+
 ###########
 # Aliases #
 ###########
@@ -122,6 +131,8 @@ alias prs='xdg-open $(parse_git_remote)/pulls 2> /dev/null'
 
 # Open up a compare in github with this branch and develop, ready for PR creation
 alias pr='xdg-open $(parse_git_remote)/compare/develop...$(git rev-parse --abbrev-ref HEAD) 2> /dev/null'
+
+alias flake8='flake8 . --exclude .venv,migrations'
 
 #####################
 # Exports variables #
