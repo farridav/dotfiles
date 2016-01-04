@@ -1,35 +1,36 @@
-
 [user]
-	email = info@davidfarrington.co.uk
-	name = David Farrington
+    email = info@davidfarrington.co.uk
+    name = David Farrington
 
 [alias]
-	dish = diff --staged
-	hash = rev-parse --short HEAD
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    dish = diff --staged
+    hash = rev-parse --short HEAD
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     graph = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s" --oneline
     type = cat-file -t
-	dump = cat-file -p
-	alias = config --get-regexp alias
-	squash = rebase -i origin/develop
-	udiff = diff HEAD...origin/develop
-	rs  = "!f(){ git fetch -p && git reset --hard origin/`git rev-parse --abbrev-ref HEAD`; }; f"
-	cb  = "!f(){ git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; }; f"
-	fu  = "!f(){ git commit -a --fixup HEAD && git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
-	am  = "!f(){ git add -u && git commit --amend && git push origin `git rev-parse --abbrev-ref HEAD` --force; }; f"
-	boo = "!f(){ git add -u && git commit --amend && git push origin --force; }; f"
-[push]
-	default = current
+    dump = cat-file -p
+    alias = config --get-regexp alias
+    squash = rebase -i origin/develop
+    udiff = diff HEAD...origin/develop
+    rs  = "!f(){ git fetch -p && git reset --hard origin/`git rev-parse --abbrev-ref HEAD`; }; f"
+    cb  = "!f(){ git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; }; f"
+    fu  = "!f(){ git commit -a --fixup HEAD && git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
+    am  = "!f(){ git add -u && git commit --amend && git push origin `git rev-parse --abbrev-ref HEAD` --force; }; f"
+    boo = "!f(){ git add -u && git commit --amend && git push origin --force; }; f"
+    su  = "!f(){ git branch --set-upstream-to=origin/`git rev-parse --abbrev-ref HEAD` `git rev-parse --abbrev-ref HEAD`; }; f"
 
-[rebase]
-	autosquash = true
+[push]
+    default = current
 
 [pull]
-	default = current
+    default = current
+
+[rebase]
+    autosquash = true
 
 [core]
-	excludesfile = '~/.gitignore'
+    excludesfile = '~/.gitignore'
