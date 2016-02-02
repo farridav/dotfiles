@@ -15,14 +15,14 @@
 (add-hook 'python-mode-hook 'anaconda-mode)
 
 ;; Setup company mode for autocompletion
-(require 'company)
-(setq company-idle-delay 0.5
-     company-tooltip-limit 10
-     company-minimum-prefix-length 2)
-(add-hook 'after-init-hook 'global-company-mode)
+;;(require 'company)
+;;(setq company-idle-delay 0.5
+;;     company-tooltip-limit 10
+;;     company-minimum-prefix-length 2)
+;;(add-hook 'after-init-hook 'global-company-mode)
 
 ;; flycheck mode
-(add-hook 'after-init-hook 'global-flycheck-mode)
+;;(add-hook 'after-init-hook 'global-flycheck-mode)
 
 ;; Show blank spaces
 ; (add-hook 'after-init-hook 'global-whitespace-mode)
