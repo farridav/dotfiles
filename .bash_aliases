@@ -4,10 +4,6 @@
 # Variables #
 #############
 
-SCOOTA_REPOS='/home/david/workspace/scootagroup'
-RBX_REPOS='/home/david/workspace/rockabox/'
-ANXS_REPOS='/home/david/workspace/ANXS'
-
 #############
 # Functions #
 #############
@@ -15,67 +11,6 @@ ANXS_REPOS='/home/david/workspace/ANXS'
 parse_git_branch () {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-
-cds () {
-    if [[ -z "$1" ]]
-    then
-        cd $SCOOTA_REPOS/scoota
-    else
-        if [ -d $SCOOTA_REPOS/scoota_$1 ];
-        then
-           cd $SCOOTA_REPOS/scoota_$1
-        else
-           cd $SCOOTA_REPOS/$1
-        fi
-    fi
-
-    if [ -f .venv/bin/activate ]; then
-	    . .venv/bin/activate
-    fi
-}
-
-_cds_completion() {
-    COMPREPLY=()
-    local cur projects
-    projects=$(ls $SCOOTA_REPOS | sed s/scoota_//g 2>/dev/null)
-    _get_comp_words_by_ref cur
-    COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
-}
-complete -F _cds_completion cds
-
-cda () {
-    if [[ -z "$1" ]]
-    then
-        cd $ANXS_REPOS && . .venv/bin/activate
-    else
-        cd $ANXS_REPOS/repos/$1 && . ../../.venv/bin/activate
-    fi
-}
-
-_cda_completion() {
-    COMPREPLY=()
-    local cur projects
-    projects=$(ls $ANXS_REPOS/repos 2>/dev/null)
-    _get_comp_words_by_ref cur
-    COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
-}
-complete -F _cda_completion cda
-
-cdr () {
-    cd $RBX_REPOS/$1
-    if [ -f .venv/bin/activate ]; then
-	. .venv/bin/activate
-    fi
-}
-
-_cdr_completion() {
-    COMPREPLY=()
-    local cur projects
-    projects=$(ls $RBX_REPOS 2>/dev/null)
-    _get_comp_words_by_ref cur
-    COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
-}
-complete -F _cdr_completion cdr
 
 parse_git_remote () {
     git ls-remote --get-url 2> /dev/null | sed s/git@github.com:/https\:\\/\\/github.com\\// | sed s/.git$//
@@ -123,6 +58,7 @@ alias cdf='cd ~/workspace/famous && . .venv/bin/activate'
 
 # Grep for python projects
 alias pygrep='grep -rn --exclude-dir .venv --exclude-dir .git --exclude *.pyc'
+
 # global find and replace
 alias greplace='grep -Irl "$1" | xargs sed -i "s/$1/$2/g"'
 

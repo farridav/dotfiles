@@ -137,17 +137,12 @@ bar {
   }
 }
 
-# Pulse Audio controls
-
+# Audio controls
 
 set $sink `pactl list short sinks | grep RUNNING | cut -f1`
+
+# Volume media keys
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
-
-# Laptop
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $sink -- +5 %
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $sink -- -5 %
-
-# Desktop
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 
@@ -155,14 +150,12 @@ bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
-# Touchpad controls
-#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym $mod+Ctrl+space exec rhythmbox-client --play-pause
+bindsym $mod+Ctrl+Left exec rhythmbox-client --previous
+bindsym $mod+Ctrl+Right exec rhythmbox-client --next
+bindsym $mod+Ctrl+Up exec amixer -q set Master 2dB+ unmute
+bindsym $mod+Ctrl+Down exec amixer -q set Master 2dB- unmute
 
 # Set the bg color
 exec --no-startup-id xsetroot -solid "#333333"
@@ -211,3 +204,9 @@ client.focused #3b1261 #3b1261 #ffffff #662b9c
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused #222222 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
+
+# Setup second screen at work
+#exec --no-startup-id xrandr --output eDP1 --auto --rotate normal --right-of HDMI1 --output HDMI1 --auto --rotate right
+exec --no-startup-id xrandr --output HDMI1 --auto --rotate right --left-of eDP1 --output eDP1 --auto --rotate normal
+
+exec --no-startup-id /home/david/.i3/swap-workspace.py

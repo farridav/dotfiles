@@ -14,23 +14,6 @@
 ;; automatically use anaconda mode for python
 (add-hook 'python-mode-hook 'anaconda-mode)
 
-;; Setup company mode for autocompletion
-;;(require 'company)
-;;(setq company-idle-delay 0.5
-;;     company-tooltip-limit 10
-;;     company-minimum-prefix-length 2)
-;;(add-hook 'after-init-hook 'global-company-mode)
-
-;; flycheck mode
-;;(add-hook 'after-init-hook 'global-flycheck-mode)
-
-;; Show blank spaces
-; (add-hook 'after-init-hook 'global-whitespace-mode)
-;(setq whitespace-display-mappings
-;      '(
-;        (space-mark 32 [183] [46])
-;        ))
-
 ;; get rid of trailing whitespace
 (defvar do-delete-trailing-whitespace t)
 (add-hook 'before-save-hook
@@ -40,6 +23,25 @@
 
 (setq-default indent-tabs-mode nil
               tab-width 4)
+
+;; make {copy, cut, paste, undo} have {C-c, C-x, C-v, C-z} keys
+(cua-mode 1)
+
+;; automatically insert matching brackets
+(electric-pair-mode 1)
+
+(show-paren-mode 1) ; turn on bracket match highlight
+
+(setq make-backup-files nil) ; stop creating those backup~ files
+
+(setq auto-save-default nil) ; stop creating those #auto-save# files
+
+(setq backup-by-copying t)
+
+(setq line-move-visual nil) ; use t for true, nil for false
+
+;; make tab key do indent first then completion.
+(setq-default tab-always-indent 'complete)
 
 (provide 'init)
 ;;; init.el ends here

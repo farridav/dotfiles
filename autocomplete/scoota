@@ -1,0 +1,29 @@
+SCOOTA_REPOS='/home/david/workspace/scootagroup'
+
+cds () {
+    if [[ -z "$1" ]]
+    then
+        cd $SCOOTA_REPOS/scoota
+    else
+        if [ -d $SCOOTA_REPOS/scoota_$1 ];
+        then
+           cd $SCOOTA_REPOS/scoota_$1
+        else
+           cd $SCOOTA_REPOS/$1
+        fi
+    fi
+
+    if [ -f .venv/bin/activate ]; then
+	    . .venv/bin/activate
+    fi
+}
+
+_cds() {
+    COMPREPLY=()
+    local cur projects
+    projects=$(ls $SCOOTA_REPOS | sed s/scoota_//g 2>/dev/null)
+    _get_comp_words_by_ref cur
+    COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
+}
+
+complete -F _cds cds
