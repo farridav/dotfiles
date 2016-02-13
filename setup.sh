@@ -1,7 +1,7 @@
 #!/bin/bash
 
 delete_and_link () {
-    rm -rf $2
+    rm -ri $2
     ln -s $PWD/$1 $2
     echo "$1 has been symlinked to $2"
 }
