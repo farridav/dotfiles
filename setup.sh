@@ -18,6 +18,7 @@ delete_and_link .gitignore ~/.gitignore
 delete_and_link .noserc ~/.noserc
 delete_and_link .tmux.conf ~/.tmux.conf
 delete_and_link init.el ~/.emacs.d/init.el
+delete_and_link i3  ~/.i3/
 delete_and_link uzbl.conf  ~/.config/uzbl/config
 
 sudo_link autocomplete/anxs /etc/bash_completion.d/anxs
