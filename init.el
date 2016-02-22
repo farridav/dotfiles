@@ -43,5 +43,9 @@
 ;; make tab key do indent first then completion.
 (setq-default tab-always-indent 'complete)
 
+;; make sure our commit msgs always open in diff mode
+(setq auto-mode-alist (cons '("COMMIT_EDITMSG" . diff-mode) auto-mode-alist))
+
+
 (provide 'init)
 ;;; init.el ends here
