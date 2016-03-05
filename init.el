@@ -25,7 +25,7 @@
               tab-width 4)
 
 ;; make {copy, cut, paste, undo} have {C-c, C-x, C-v, C-z} keys
-(cua-mode 1)
+;; (cua-mode 1)
 
 ;; automatically insert matching brackets
 (electric-pair-mode 1)
