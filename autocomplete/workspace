@@ -1,0 +1,31 @@
+WORKSPACE='/home/david/workspace/'
+
+c () {
+    if [[ -z "$1" ]]
+    then
+        cd $WORKSPACE
+    else
+        if [ -d $WORKSPACE/$1 ];
+        then
+           cd $WORKSPACE/$1
+        fi
+    fi
+
+    if [ -f .venv/bin/activate ]; then
+	    . .venv/bin/activate
+    fi
+
+    if [ -d .git ]; then
+       git status -s
+    fi
+}
+
+_c() {
+    COMPREPLY=()
+    local cur projects
+    projects=$(ls $WORKSPACE)
+    _get_comp_words_by_ref cur
+    COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
+}
+
+complete -F _c c

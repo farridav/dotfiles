@@ -1,54 +1,68 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+configure_history () {
+    # Dont insert duplicates, or commands beggining with space
+    # configure history size
+    # append to the history file, don't overwrite it
+
+    export HISTCONTROL=ignoredups:ignorespace
+    export HISTSIZE=1000000
+    export HISTFILESIZE=2000000
+    shopt -s histappend
+}
+
+configure_bash () {
+    # Bring in ouraliases
+    # Activate autocompletion
+
+    if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+    fi
+
+    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+        . /etc/bash_completion
+    fi
+}
+
+configure_shell () {
+    # make less more friendly for non-text input files
+    # Adjust window cols and rows on each commandw
+
+    [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+    shopt -s checkwinsize
+}
+
+configure_nvm () {
+    # Start up NVM
+
+    export NVM_DIR="~/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+}
+
+configure_ssh_agent () {
+    # Start up our ssh-agent and add our identity
+
+    if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+        eval `ssh-agent`
+        ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+    fi
+
+    export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+
+    ssh-add -l | grep "The agent has no identities" && ssh-add
+}
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
+configure_shell
+configure_history
+configure_bash
+configure_nvm
+configure_ssh_agent
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+export PATH=$PATH:/opt/google_appengine/
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000000
-HISTFILESIZE=2000000
+# The next line updates PATH for the Google Cloud SDK.
+source '/opt/google-cloud-sdk/path.bash.inc'
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
-
-# Start up NVM
-export NVM_DIR="/home/david/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Start up our ssh-agent and add our identity
-if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-    eval `ssh-agent`
-    ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-fi
-
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-
-ssh-add -l | grep "The agent has no identities" && ssh-add
+# The next line enables shell command completion for gcloud.
+source '/opt/google-cloud-sdk/completion.bash.inc'

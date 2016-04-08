@@ -29,5 +29,5 @@ sudo_link $PWD/autocomplete/anxs      /etc/bash_completion.d/anxs
 sudo_link $PWD/autocomplete/rbx       /etc/bash_completion.d/rbx
 sudo_link $PWD/autocomplete/scoota    /etc/bash_completion.d/scoota
 sudo_link $PWD/autocomplete/git_repos /etc/bash_completion.d/git_repos
-sudo_link $PWD/autocomplete/git_repos /etc/bash_completion.d/git_repos
+sudo_link $PWD/autocomplete/workspace /etc/bash_completion.d/workspace
 sudo_link /usr/bin/uzbl-tabbed        /usr/bin/www
