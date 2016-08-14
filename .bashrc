@@ -17,8 +17,8 @@ configure_bash () {
         . ~/.bash_aliases
     fi
 
-    if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-        . /etc/bash_completion
+    if [ -f $(brew --prefix)/etc/bash_completion ] && ! shopt -oq posix; then
+        . $(brew --prefix)/etc/bash_completion
     fi
 }
 
@@ -58,11 +58,3 @@ configure_history
 configure_bash
 configure_nvm
 configure_ssh_agent
-
-export PATH=$PATH:/opt/google_appengine/
-
-# The next line updates PATH for the Google Cloud SDK.
-source '/opt/google-cloud-sdk/path.bash.inc'
-
-# The next line enables shell command completion for gcloud.
-source '/opt/google-cloud-sdk/completion.bash.inc'
