@@ -1,0 +1,3 @@
+{
+	"last_test_run": "source /Users/david.farrington/workspace/gamesys/py-mobiauth/.venv/bin/activate;nosetests tests.users.functional.test_invite:InviteTestCase.test_invite;deactivate"
+}
