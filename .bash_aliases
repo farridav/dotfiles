@@ -8,9 +8,6 @@
 # Exports variables #
 #####################
 
-# Colour (for Mac OS)
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR='emacs'
 export PS1="[\[\033[32m\]\w\[\033[0m\]]\$(parse_git_branch)\n\$(get_date) \[\033[1;36m\]\[\033[1;33m\]-> \[\033[0m\]"
 
@@ -23,7 +20,7 @@ parse_git_branch () {
 }
 
 parse_git_remote () {
-    git ls-remote --get-url 2> /dev/null | sed s/git@github.com:/https\:\\/\\/github.com\\// | sed s/.git$//
+    git ls-remote --get-url 2> /dev/null | sed "s/git@github.com:/https:\/\/github.com\//" | sed s/.git$//
 }
 
 get_date () {
@@ -72,7 +69,6 @@ alias greplace='grep -Irl "$1" | xargs sed -i "s/$1/$2/g"'
 
 alias docker_container_wipe='docker rm -f $(docker ps -a -q)'
 alias docker_image_wipe='docker rmi -f $(docker images -q)'
-alias docker_start='/Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh'
 
 alias flip='xrandr --output HDMI1 --auto --left-of eDP1 --rotate normal'
 

@@ -16,9 +16,9 @@ complete_gs () {
             then
                 cd $GS_REPOS/$1
                 if [ -f .venv/bin/activate ]; then
-	                . .venv/bin/activate
+                    . .venv/bin/activate
                 elif [ -f env/bin/activate ]; then
-	                . env/bin/activate
+                    . env/bin/activate
                 fi
             fi
         fi
@@ -47,9 +47,9 @@ complete_os () {
             then
                 cd $OS_REPOS/$1
                 if [ -f .venv/bin/activate ]; then
-	                . .venv/bin/activate
+                    . .venv/bin/activate
                 elif [ -f env/bin/activate ]; then
-	                . env/bin/activate
+                    . env/bin/activate
                 fi
             fi
         fi

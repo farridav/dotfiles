@@ -1,3 +1,5 @@
+#!/bin/bash
+
 configure_history () {
     # Dont insert duplicates, or commands beggining with space
     # configure history size
@@ -10,21 +12,20 @@ configure_history () {
 }
 
 configure_bash () {
-    # Bring in ouraliases
-    # Activate autocompletion
+    # Bring in our aliases and autocompletion
 
     if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
     fi
 
-    if [ -f $(brew --prefix)/etc/bash_completion ] && ! shopt -oq posix; then
-        . $(brew --prefix)/etc/bash_completion
+    if [ -f ~/.bash_completion ] && ! shopt -oq posix; then
+        . ~/.bash_completion
     fi
 }
 
 configure_shell () {
     # make less more friendly for non-text input files
-    # Adjust window cols and rows on each commandw
+    # Adjust window cols and rows on each command
 
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
     shopt -s checkwinsize
