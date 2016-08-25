@@ -1,0 +1,14 @@
+{
+    "anaconda_linting": true,
+    "pep8": true,
+    "use_pylint": false,
+    "pyflakes_ignore_import_*": false,
+    "anaconda_linter_show_errors_on_save": true,
+    "auto_python_builder_enabled": false,
+    "complete_parameters": true,
+    "complete_all_parameters": false,
+    "mccabe_threshold": 2,
+    "anaconda_linting_behaviour": "save-only",
+    "validate_imports": false,
+    "test_runner_theme": "PythonConsoleDark.hidden-tmTheme",
+}

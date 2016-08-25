@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+BASH_COMPLETION_DIR="$(brew --prefix)/etc/bash_completion"
+
 delete_and_link () {
     if [[ ! -L $2 ]]; then
         rm -r $2
@@ -21,13 +24,16 @@ delete_and_link $PWD/.gitconfig     $HOME/.gitconfig
 delete_and_link $PWD/.gitignore     $HOME/.gitignore
 delete_and_link $PWD/.noserc        $HOME/.noserc
 delete_and_link $PWD/.tmux.conf     $HOME/.tmux.conf
-delete_and_link $PWD/.i3            $HOME/.i3
 delete_and_link $PWD/init.el        $HOME/.emacs.d/init.el
-delete_and_link $PWD/uzbl.conf      $HOME/.config/uzbl/config
+delete_and_link $PWD/htoprc         $HOME/.config/htop/htoprc
 
-sudo_link $PWD/autocomplete/anxs      /etc/bash_completion.d/anxs
-sudo_link $PWD/autocomplete/rbx       /etc/bash_completion.d/rbx
-sudo_link $PWD/autocomplete/scoota    /etc/bash_completion.d/scoota
-sudo_link $PWD/autocomplete/git_repos /etc/bash_completion.d/git_repos
-sudo_link $PWD/autocomplete/git_repos /etc/bash_completion.d/git_repos
-sudo_link /usr/bin/uzbl-tabbed        /usr/bin/www
+# Linux
+#delete_and_link $PWD/.i3            $HOME/.i3
+#delete_and_link $PWD/uzbl.conf      $HOME/.config/uzbl/config
+#sudo_link /usr/bin/uzbl-tabbed      /usr/bin/www
+#sudo_link $PWD/autocomplete/gamesys $BASH_COMPLETION_DIR/gamesys
+#sudo_link $PWD/autocomplete/pr      $BASH_COMPLETION_DIR/pr
+
+# Mac
+delete_and_link $PWD/sublime/User     $HOME/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+delete_and_link $PWD/.bash_completion $HOME/.bash_completion

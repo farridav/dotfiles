@@ -25,7 +25,7 @@
               tab-width 4)
 
 ;; make {copy, cut, paste, undo} have {C-c, C-x, C-v, C-z} keys
-;; (cua-mode 1)
+(cua-mode 1)
 
 ;; automatically insert matching brackets
 (electric-pair-mode 1)
@@ -46,6 +46,41 @@
 ;; make sure our commit msgs always open in diff mode
 (setq auto-mode-alist (cons '("COMMIT_EDITMSG" . diff-mode) auto-mode-alist))
 
+(setq auto-mode-alist (cons '(".idea" . org-mode) auto-mode-alist))
+
+(put 'downcase-region 'disabled nil)
+
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 (provide 'init)
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(require-final-newline t)
+ '(shift-select-mode t)
+ '(show-trailing-whitespace t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(defun python-add-breakpoint ()
+  (interactive)
+;;  (py-newline-and-indent)
+  (insert "import ipdb; ipdb.set_trace()")
+  (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
+
+;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+
+(menu-bar-mode -1)
+
+;; Forces the messages to 0, and kills the *Messages* buffer - thus disabling it on startup.
+(setq-default message-log-max nil)
+(kill-buffer "*Messages*")
