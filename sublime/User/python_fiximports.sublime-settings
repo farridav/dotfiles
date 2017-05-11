@@ -1,5 +1,0 @@
-{
-    "autofix_on_save": true,
-    "split_import_statements": false,
-    "sort_import_statements": true,
-}

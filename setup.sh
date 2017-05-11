@@ -19,7 +19,7 @@ delete_and_link $PWD/.bashrc        $HOME/.bashrc
 delete_and_link $PWD/.bash_aliases  $HOME/.bash_aliases
 delete_and_link $PWD/.gitconfig     $HOME/.gitconfig
 delete_and_link $PWD/.gitignore     $HOME/.gitignore
-delete_and_link $PWD/.noserc        $HOME/.noserc
+# delete_and_link $PWD/.noserc        $HOME/.noserc
 delete_and_link $PWD/.tmux.conf     $HOME/.tmux.conf
 delete_and_link $PWD/init.el        $HOME/.emacs.d/init.el
 delete_and_link $PWD/htoprc         $HOME/.config/htop/htoprc

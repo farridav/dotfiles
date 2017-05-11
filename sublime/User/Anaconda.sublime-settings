@@ -1,4 +1,5 @@
 {
+    "swallow_startup_errors": true,
     "anaconda_linting": true,
     "pep8": true,
     "use_pylint": false,
@@ -7,8 +8,12 @@
     "auto_python_builder_enabled": false,
     "complete_parameters": true,
     "complete_all_parameters": false,
+    "auto_project_switch": false,
     "mccabe_threshold": 2,
     "anaconda_linting_behaviour": "save-only",
-    "validate_imports": false,
+    "validate_imports": true,
+    "pep8_max_line_length": 120,
     "test_runner_theme": "PythonConsoleDark.hidden-tmTheme",
+    "suppress_word_completions": false,
+    "suppress_explicit_completions": false,
 }

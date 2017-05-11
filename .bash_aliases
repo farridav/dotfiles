@@ -8,8 +8,13 @@
 # Exports variables #
 #####################
 
-export EDITOR='emacs'
 export PS1="[\[\033[32m\]\w\[\033[0m\]]\$(parse_git_branch)\n\$(get_date) \[\033[1;36m\]\[\033[1;33m\]-> \[\033[0m\]"
+export PYTHONIOENCODING=utf_8
+alias emacs="/usr/local/Cellar/emacs/24.x/Emacs.app/Contents/MacOS/Emacs -nw"
+export EDITOR='emacs -nw'
+
+# Mac
+export PIP_DOWNLOAD_CACHE=$HOME/Library/Caches/pip-downloads
 
 #############
 # Functions #
@@ -21,6 +26,11 @@ parse_git_branch () {
 
 parse_git_remote () {
     git ls-remote --get-url 2> /dev/null | sed "s/git@github.com:/https:\/\/github.com\//" | sed s/.git$//
+}
+
+kill_port () {
+    lsof -i tcp:$1
+    lsof -t -i tcp:$1 | xargs kill -9
 }
 
 get_date () {
@@ -72,4 +82,4 @@ alias docker_image_wipe='docker rmi -f $(docker images -q)'
 
 alias flip='xrandr --output HDMI1 --auto --left-of eDP1 --rotate normal'
 
-alias pickup='emacs -nw $(git wip)'
+alias gsmash='rm -rf .storage/ && ./manage.py migrate && ./manage.py loaddata initial_data && ./manage.py generate_data && ./manage.py loaddata .idea/auth.yaml'

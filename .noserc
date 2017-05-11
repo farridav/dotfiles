@@ -1,8 +1,8 @@
 [nosetests]
 
 # Output control
-#nologcapture=1
-#nocapture=1
+nologcapture=1
+nocapture=1
 logging-clear-handlers=1
 logging-level=INFO
 with-yanc=1
@@ -10,8 +10,4 @@ with-yanc=1
 # Functionality
 with-id=1
 failed=1
-#processes=-1
-
-# Crap engine
-with-gae=1
-gae-lib-root=/usr/local/google_appengine/
+processes=-1

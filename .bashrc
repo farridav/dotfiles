@@ -33,9 +33,8 @@ configure_shell () {
 
 configure_nvm () {
     # Start up NVM
-
-    export NVM_DIR="~/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    export NVM_DIR="$HOME/.nvm"
+    . "/usr/local/opt/nvm/nvm.sh"
 }
 
 configure_ssh_agent () {
@@ -51,6 +50,30 @@ configure_ssh_agent () {
     ssh-add -l | grep "The agent has no identities" && ssh-add
 }
 
+configure_gcloud () {
+    export CLOUD_SDK_ROOT="/opt/google-cloud-sdk"
+    export GAE_SDK_ROOT="${CLOUD_SDK_ROOT}/platform/google_appengine"
+    export PYTHONPATH="${PYTHONPATH}:${GAE_SDK_ROOT}/"
+    export GAE_LIB_ROOT="${GAE_SDK_ROOT}"
+
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f "${CLOUD_SDK_ROOT}/path.bash.inc" ]; then
+        source "${CLOUD_SDK_ROOT}/path.bash.inc"
+    fi
+
+    # The next line enables shell command completion for gcloud.
+    if [ -f "${CLOUD_SDK_ROOT}/completion.bash.inc" ]; then
+        source "${CLOUD_SDK_ROOT}/completion.bash.inc"
+    fi
+
+    #for module in ${GAE_SDK_ROOT}/lib/*; do
+    #    if [ -r ${module} ]; then
+    #        PYTHONPATH=${module}:${PYTHONPATH}
+    #    fi
+    #done
+    #unset module
+}
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -59,3 +82,4 @@ configure_history
 configure_bash
 configure_nvm
 configure_ssh_agent
+configure_gcloud

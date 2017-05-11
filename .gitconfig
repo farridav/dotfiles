@@ -5,6 +5,7 @@
 [alias]
     dish = diff --staged
     hash = rev-parse --short HEAD
+    po = push origin
     co = checkout
     ci = commit
     st = status
@@ -16,6 +17,7 @@
     alias = config --get-regexp alias
     squash = rebase -i origin/master
     udiff = diff HEAD...origin/master
+    rssub = submodule update --init
     rs  = "!f(){ git fetch -p && git reset --hard origin/`git rev-parse --abbrev-ref HEAD`; }; f"
     cb  = "!f(){ git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; }; f"
     fu  = "!f(){ git commit -a --fixup HEAD && git push origin `git rev-parse --abbrev-ref HEAD`; }; f"

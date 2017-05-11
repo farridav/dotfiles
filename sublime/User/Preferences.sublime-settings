@@ -1,5 +1,15 @@
 {
 	"always_show_minimap_viewport": true,
+	"auto_complete_commit_on_tab": true,
+	"auto_complete_cycle": true,
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python"
+		}
+	],
+	"auto_complete_with_fields": true,
 	"binary_file_patterns":
 	[
 		"*.dds",
@@ -11,18 +21,22 @@
 		"*.jpg",
 		"*.pdf",
 		"*.png",
+		"*.sqlite3",
 		"*.swf",
 		"*.tga",
 		"*.ttf",
 		"*.zip",
+		".coverage",
+		".storage/**",
 		"__pycache__/**"
 	],
 	"bold_folder_labels": true,
-	"color_scheme": "Packages/Theme - Cobalt2/cobalt2.tmTheme",
 	"copy_with_empty_selection": false,
+	"create_window_at_startup": false,
 	"draw_minimap_border": true,
 	"draw_white_space": "all",
 	"ensure_newline_at_eof_on_save": true,
+	"fade_fold_buttons": false,
 	"file_exclude_patterns":
 	[
 		"*.pyc",
@@ -77,7 +91,7 @@
 	],
 	"rulers":
 	[
-		79
+		120
 	],
 	"show_full_path": true,
 	"tab_size": 4,

@@ -2,3 +2,9 @@
 *.pyc
 .venv
 *.cache
+.DS_Store
+*.crt
+*ca-bundle
+
+Package Control.cache/
+PythonTestRunner.last-run

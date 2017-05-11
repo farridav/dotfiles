@@ -14,10 +14,24 @@
     { "keys": ["ctrl+shift+up"], "command": "swap_line_up" },
     { "keys": ["ctrl+shift+down"], "command": "swap_line_down" },
 
+    { "keys": ["super+."], "command": "anaconda_goto" },
+
+    { "keys": ["super+;"], "command": "anaconda_show_usages" },
+
+    { "keys": ["ctrl+d"], "command": "duplicate_line" },
+
+    { "keys": ["super+shift+f"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+    { "keys": ["super+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+
+    { "keys": ["super+left"], "command": "jump_back" },
+    { "keys": ["super+right"], "command": "jump_forward" },
+
+    { "keys": ["super+u"], "command": "upper_case" },
+    { "keys": ["super+l"], "command": "lower_case" },
+
 
     {
-        "command": "anaconda_run_current_test", "keys": ["ctrl+t"],
-        "context": [
+        "command": "anaconda_run_current_test", "keys": ["ctrl+t"], "context": [
             {"key": "selector", "operator": "equal", "operand": "source.python"}
         ]
     }
