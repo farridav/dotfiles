@@ -1,0 +1,54 @@
+# Status bar conf
+
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 3
+}
+
+order += "battery 0"
+order += "volume master"
+order += "disk /"
+order += "wireless wlp58s0"
+order += "ethernet enx48d705e9fa46"
+order += "load"
+order += "tztime local"
+
+battery 0 {
+	format = "%status %percentage"
+	#path = "/sys/class/power_supply/BAT0/uevent"
+}
+
+wireless wlp58s0 {
+        format_up = "W: %essid %quality, %bitrate - %ip"
+        format_down = "W: down"
+}
+
+ethernet enx48d705e9fa46 {
+        # if you use %speed, i3status requires the cap_net_admin capability
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+        format = "%5min Load"
+}
+
+volume master {
+        format = "Vol: %volume"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+disk "/" {
+        format = "%free"
+}

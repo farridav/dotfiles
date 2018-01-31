@@ -18,6 +18,10 @@ configure_bash () {
         . ~/.bash_aliases
     fi
 
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    fi
+
     if [ -f ~/.bash_completion ] && ! shopt -oq posix; then
         . ~/.bash_completion
     fi
@@ -29,12 +33,6 @@ configure_shell () {
 
     [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
     shopt -s checkwinsize
-}
-
-configure_nvm () {
-    # Start up NVM
-    export NVM_DIR="$HOME/.nvm"
-    . "/usr/local/opt/nvm/nvm.sh"
 }
 
 configure_ssh_agent () {
@@ -53,26 +51,33 @@ configure_ssh_agent () {
 configure_gcloud () {
     export CLOUD_SDK_ROOT="/opt/google-cloud-sdk"
     export GAE_SDK_ROOT="${CLOUD_SDK_ROOT}/platform/google_appengine"
-    export PYTHONPATH="${PYTHONPATH}:${GAE_SDK_ROOT}/"
-    export GAE_LIB_ROOT="${GAE_SDK_ROOT}"
+    export PYTHONPATH="${GAE_SDK_ROOT}:${PYTHONPATH}"
+
+    # * OPTIONAL STEP *
+    # If you wish to import all Python modules, you may iterate in the directory
+    # tree and import each module.
+    #
+    # * WARNING *
+    # Some modules have two or more versions available (Ex. django), so the loop
+    # will import always its latest version.
+    #for module in ${GAE_SDK_ROOT}/lib/*; do
+    #  if [ -r ${module} ]; then
+    #    PYTHONPATH=${module}:${PYTHONPATH}
+    #  fi
+    #done
+    #unset module
 
     # The next line updates PATH for the Google Cloud SDK.
-    if [ -f "${CLOUD_SDK_ROOT}/path.bash.inc" ]; then
-        source "${CLOUD_SDK_ROOT}/path.bash.inc"
+    if [ -f '/opt/google-cloud-sdk/path.bash.inc' ]; then
+        source '/opt/google-cloud-sdk/path.bash.inc';
     fi
 
     # The next line enables shell command completion for gcloud.
-    if [ -f "${CLOUD_SDK_ROOT}/completion.bash.inc" ]; then
-        source "${CLOUD_SDK_ROOT}/completion.bash.inc"
+    if [ -f '/opt/google-cloud-sdk/completion.bash.inc' ]; then
+        source '/opt/google-cloud-sdk/completion.bash.inc';
     fi
-
-    #for module in ${GAE_SDK_ROOT}/lib/*; do
-    #    if [ -r ${module} ]; then
-    #        PYTHONPATH=${module}:${PYTHONPATH}
-    #    fi
-    #done
-    #unset module
 }
+
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -80,6 +85,5 @@ configure_gcloud () {
 configure_shell
 configure_history
 configure_bash
-configure_nvm
 configure_ssh_agent
 configure_gcloud

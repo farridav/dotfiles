@@ -6,7 +6,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -19,17 +19,13 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -e "tmux -2 new-session -A -s dev"
+bindsym $mod+Return exec xfce4-terminal --hide-borders --hide-menubar --hide-scrollbar -e "tmux -2 new-session -A -s dev"
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+Left focus left
@@ -102,6 +98,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+Shift+l exec "/home/david/.i3/lock.sh"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -142,38 +140,45 @@ bar {
 set $sink `pactl list short sinks | grep RUNNING | cut -f1`
 
 # Volume media keys
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
+#bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+#bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+
+# Pulse Audio controls
+set $output_sink "$(pactl list short sinks | grep output | head -n1 | cut -f2)"
+set $input_source "$(pactl list short sources | grep input | head -n1 | cut -f2)"
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume $output_sink +2%
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume $output_sink -2%
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-volume $output_sink 0%
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 3 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 3 # decrease screen brightness
 
-# Media player controls
-bindsym $mod+Ctrl+space exec rhythmbox-client --play-pause
-bindsym $mod+Ctrl+Left exec rhythmbox-client --previous
-bindsym $mod+Ctrl+Right exec rhythmbox-client --next
-bindsym $mod+Ctrl+Up exec amixer -q set Master 2dB+ unmute
-bindsym $mod+Ctrl+Down exec amixer -q set Master 2dB- unmute
+# Assign pgUp and pgDown to left and right
+#exec --no-startup-id xmodmap -e "keycode 117 = 114"
+#exec --no-startup-id xmodmap -e "keycode 112 = 113"
+
+# Bind print screen to scrot
+# bindsym PrtScr exec scrot ~/Desktop/screenshot.jpg
+
+# 107 prtscreen
 
 # Set the bg color
-exec --no-startup-id xsetroot -solid "#333333"
+# exec --no-startup-id xsetroot -solid "#333333"
+exec --no-startup-id feh --bg-center /home/david/Documents/wallpaper.jpg
 
 # Start the network manager
 exec --no-startup-id nm-applet
 
+# Start the bluetooth manager applet
+exec --no-startup-id blueman-applet
+
 # Set the keyboard to GB
 exec setxkbmap gb
 
-# Lock screen
-bindsym $mod+l exec gnome-screensaver-command -l
-
-# Increase screensaver timeout to 40 mins
-exec --no-startup-id xset dpms 2400
-
 # Watch our battery
-exec_always sudo ./battery-indicator
+exec_always sudo /home/david/.i3/battery-indicator
 
 # Dont change focus with the mouse
 focus_follows_mouse no
@@ -181,8 +186,8 @@ focus_follows_mouse no
 # Disable the screensaver
 exec xset s off
 
-# Power manageent
-set $Locker i3lock && sleep 1
+# Power management
+set $Locker /home/david/.i3/lock.sh && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -204,9 +209,3 @@ client.focused #3b1261 #3b1261 #ffffff #662b9c
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused #222222 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
-
-# Setup second screen at work
-#exec --no-startup-id xrandr --output eDP1 --auto --rotate normal --right-of HDMI1 --output HDMI1 --auto --rotate right
-exec --no-startup-id xrandr --output HDMI1 --auto --rotate right --left-of eDP1 --output eDP1 --auto --rotate normal
-
-exec --no-startup-id /home/david/.i3/swap-workspace.py

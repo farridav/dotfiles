@@ -26,10 +26,10 @@ delete_and_link $PWD/htoprc         $HOME/.config/htop/htoprc
 delete_and_link $PWD/.bash_completion $HOME/.bash_completion
 
 # Linux
-#delete_and_link $PWD/.i3            $HOME/.i3
+delete_and_link $PWD/.i3            $HOME/.i3
 #delete_and_link $PWD/uzbl.conf      $HOME/.config/uzbl/config
 #sudo_link /usr/bin/uzbl-tabbed      /usr/bin/www
 
 # Mac
-delete_and_link $PWD/sublime/User     "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
-delete_and_link $PWD/.profile.mac.sh $HOME/.profile
+#delete_and_link $PWD/sublime/User     "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
+#delete_and_link $PWD/.profile.mac.sh $HOME/.profile
