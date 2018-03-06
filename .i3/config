@@ -6,7 +6,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 12
+font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -20,6 +20,16 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal --hide-borders --hide-menubar --hide-scrollbar -e "tmux -2 new-session -A -s dev"
+
+# Startup terminal, editor and web browser
+exec --no-startup-id i3-msg 'workspace 1:Terminal; exec xfce4-terminal --hide-borders --hide-menubar --hide-scrollbar -e "tmux -2 new-session -A -s dev"'
+exec --no-startup-id i3-msg 'workspace 2:Web; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 3:Editor; exec /usr/local/bin/charm'
+
+# Keep terminals, browsers and editors on the right workspace
+assign [class="Xfce4-terminal"] 1:Terminal
+assign [class="Firefox"] 2:Web
+#assign [class="jetbrains-pycharm-ce"] 3:Editor
 
 # kill focused window
 bindsym $mod+q kill
@@ -66,9 +76,9 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
+bindsym $mod+1 workspace 1:Terminal
+bindsym $mod+2 workspace 2:Web
+bindsym $mod+3 workspace 3:Editor
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -80,9 +90,9 @@ bindsym $mod+0 workspace 10
 popup_during_fullscreen smart
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+1 move container to workspace 1:Terminal
+bindsym $mod+Shift+2 move container to workspace 2:Web
+bindsym $mod+Shift+3 move container to workspace 3:Editor
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -123,6 +133,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+  #status_command py3status -c ~/.i3/status.conf
   status_command i3status -c ~/.i3/status.conf
   colors {
     separator #666666
@@ -136,7 +147,6 @@ bar {
 }
 
 # Audio controls
-
 set $sink `pactl list short sinks | grep RUNNING | cut -f1`
 
 # Volume media keys
@@ -152,20 +162,19 @@ bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume $output
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-volume $output_sink 0%
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 3 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 3 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 -time 100 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 -time 100 # decrease screen brightness
 
 # Assign pgUp and pgDown to left and right
 #exec --no-startup-id xmodmap -e "keycode 117 = 114"
 #exec --no-startup-id xmodmap -e "keycode 112 = 113"
 
 # Bind print screen to scrot
-# bindsym PrtScr exec scrot ~/Desktop/screenshot.jpg
+bindsym Shift+Alt+4 exec scrot -s -e 'mv $f ~/Pictures/screenshots/'
 
-# 107 prtscreen
+bindsym Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/screenshots/'
 
 # Set the bg color
-# exec --no-startup-id xsetroot -solid "#333333"
 exec --no-startup-id feh --bg-center /home/david/Documents/wallpaper.jpg
 
 # Start the network manager
@@ -177,14 +186,17 @@ exec --no-startup-id blueman-applet
 # Set the keyboard to GB
 exec setxkbmap gb
 
-# Watch our battery
-exec_always sudo /home/david/.i3/battery-indicator
+# Start xfce power manager
+exec --no-startup-id /usr/bin/xfce4-power-manager
+
+# set DPI
+#exec_always xrandr --dpi 110 --no-startup-id
 
 # Dont change focus with the mouse
 focus_follows_mouse no
 
 # Disable the screensaver
-exec xset s off
+# exec xset s off
 
 # Power management
 set $Locker /home/david/.i3/lock.sh && sleep 1

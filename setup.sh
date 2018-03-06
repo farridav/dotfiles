@@ -29,6 +29,7 @@ delete_and_link $PWD/.bash_completion $HOME/.bash_completion
 delete_and_link $PWD/.i3            $HOME/.i3
 #delete_and_link $PWD/uzbl.conf      $HOME/.config/uzbl/config
 #sudo_link /usr/bin/uzbl-tabbed      /usr/bin/www
+sudo_link $PWD/.i3/grab.sh           /usr/bin/grab
 
 # Mac
 #delete_and_link $PWD/sublime/User     "$HOME/Library/Application Support/Sublime Text 3/Packages/User"

@@ -87,3 +87,10 @@ configure_history
 configure_bash
 configure_ssh_agent
 configure_gcloud
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash

@@ -44,7 +44,8 @@ export EDITOR='emacs -nw'
 export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 
 export GOPATH=$HOME/workspace/go
-export PATH=$PATH:/usr/local/go/bin:/opt/bin:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:/opt/bin:$GOPATH/bin:$HOME/.npm-packages/bin
+
 
 ###########
 # Aliases #
@@ -58,6 +59,7 @@ alias sync='rsync -avz --exclude .git --exclude .venv ultra:`pwd`/ `pwd`/'
 alias clean='find . -name "*~" -delete && find . -name "*.pyc" -delete'
 alias terraform_graph='terraform graph | dot -Tpng > /tmp/graph.png && xdg-open /tmp/graph.png'
 alias flake='flake8 --format "%(path)s:%(row)d" | xargs charm'
+alias grab='scrot -s -e "mv $f ~/Pictures/screenshots/"'
 
 # ls aliases
 alias l='ls -1 --color=auto'
@@ -73,5 +75,5 @@ alias docker_image_wipe='docker rmi -f $(docker images -q)'
 alias venv2='virtualenv .venv -p $(which python2.7) && . .venv/bin/activate'
 alias venv='virtualenv .venv -p $(which python3.6) && . .venv/bin/activate'
 
-alias clip='xsel --clipboard'
+alias clip='xclip -i -selection clipboard'
 alias base64='base64 -w0'
