@@ -6,7 +6,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -19,17 +19,23 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal --hide-borders --hide-menubar --hide-scrollbar -e "tmux -2 new-session -A -s dev"
+bindsym $mod+Return exec i3-sensible-terminal -e "tmux -2 new-session -A -s dev"
+
+# Set Resolution
+exec --no-startup-id xrandr --output eDP-1 --mode "2560x1440"
+bindsym $mod+Shift+Return exec xrandr --output eDP-1 --mode "2560x1440"
 
 # Startup terminal, editor and web browser
-exec --no-startup-id i3-msg 'workspace 1:Terminal; exec xfce4-terminal --hide-borders --hide-menubar --hide-scrollbar -e "tmux -2 new-session -A -s dev"'
-exec --no-startup-id i3-msg 'workspace 2:Web; exec /usr/bin/firefox'
-exec --no-startup-id i3-msg 'workspace 3:Editor; exec /usr/local/bin/charm'
+exec --no-startup-id i3-msg 'workspace 1:Terminal; exec i3-sensible-terminal -e "tmux -2 new-session -A -s dev"'
+exec --no-startup-id i3-msg 'workspace 2:Firefox; exec /usr/bin/firefox'
+exec --no-startup-id i3-msg 'workspace 3:Editor; exec /usr/bin/charm'
+exec --no-startup-id i3-msg 'workspace 4:Slack; exec /usr/bin/slack'
 
-# Keep terminals, browsers and editors on the right workspace
-assign [class="Xfce4-terminal"] 1:Terminal
-assign [class="Firefox"] 2:Web
-#assign [class="jetbrains-pycharm-ce"] 3:Editor
+# Keep terminals, and browsers on the right workspace
+assign [class="xfce4-terminal"] 1:Terminal
+assign [class="Firefox"] 2:Firefox
+# assign [class="PyCharm"] 3:PyCharm
+assign [class="Slack"] 4:Slack
 
 # kill focused window
 bindsym $mod+q kill
@@ -70,16 +76,16 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1:Terminal
-bindsym $mod+2 workspace 2:Web
+bindsym $mod+2 workspace 2:Firefox
 bindsym $mod+3 workspace 3:Editor
-bindsym $mod+4 workspace 4
+bindsym $mod+4 workspace 4:Slack
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -91,9 +97,9 @@ popup_during_fullscreen smart
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1:Terminal
-bindsym $mod+Shift+2 move container to workspace 2:Web
+bindsym $mod+Shift+2 move container to workspace 2:Firefox
 bindsym $mod+Shift+3 move container to workspace 3:Editor
-bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+4 move container to workspace 4:Slack
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -175,13 +181,13 @@ bindsym Shift+Alt+4 exec scrot -s -e 'mv $f ~/Pictures/screenshots/'
 bindsym Print exec --no-startup-id scrot -e 'mv $f ~/Pictures/screenshots/'
 
 # Set the bg color
-exec --no-startup-id feh --bg-center /home/david/Documents/wallpaper.jpg
+exec --no-startup-id feh --bg-center "/home/david/Pictures/wallpaper/$(ls -1 ~/Pictures/wallpaper/ | shuf -n 1)"
 
 # Start the network manager
-exec --no-startup-id nm-applet
+exec --no-startup-id /usr/bin/nm-applet
 
 # Start the bluetooth manager applet
-exec --no-startup-id blueman-applet
+exec --no-startup-id /usr/bin/blueman-applet
 
 # Set the keyboard to GB
 exec setxkbmap gb
@@ -189,14 +195,14 @@ exec setxkbmap gb
 # Start xfce power manager
 exec --no-startup-id /usr/bin/xfce4-power-manager
 
-# set DPI
-#exec_always xrandr --dpi 110 --no-startup-id
-
 # Dont change focus with the mouse
 focus_follows_mouse no
 
 # Disable the screensaver
-# exec xset s off
+exec xset s off
+
+# onscreen keyboard
+#exec_always onboard
 
 # Power management
 set $Locker /home/david/.i3/lock.sh && sleep 1
@@ -210,14 +216,18 @@ mode "$mode_system" {
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
-    # back to normal: Enter or Escape
+    # back to normal: Enter or Escape%
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
 bindsym $mod+Delete mode "$mode_system"
+bindsym $mod+Esc mode "$mode_system"
 
 client.focused #3b1261 #3b1261 #ffffff #662b9c
 client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused #222222 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
+
+# start our composite manager
+exec --no-startup-id compton -b

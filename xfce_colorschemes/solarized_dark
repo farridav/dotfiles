@@ -1,0 +1,9 @@
+[Scheme]
+Name=My Solarized Dark
+ColorForeground=#ffffffffffff
+ColorBackground=#002b36
+ColorCursor=#93a1a1
+ColorBold=#93a1a1
+ColorBoldUseDefault=FALSE
+ColorPalette=rgb(7,54,66);rgb(255,187,185);rgb(144,252,207);rgb(181,137,0);rgb(38,139,210);rgb(211,54,130);rgb(42,161,152);rgb(255,255,255);rgb(0,43,54);rgb(255,0,0);rgb(86,255,0);rgb(85,231,255);rgb(116,255,247);rgb(108,113,196);rgb(218,255,255);rgb(255,255,255)
+TabActivityColor=#dc322f

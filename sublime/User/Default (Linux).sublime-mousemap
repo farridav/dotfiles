@@ -4,8 +4,8 @@
         "count": 1,
         "modifiers": ["ctrl"],
         "press_command": "drag_select",
-        "command": "goto_definition"
-        //"command": "anaconda_goto"
+        //"command": "goto_definition"
+        "command": "anaconda_goto"
     },
     {
         "button": "button2",

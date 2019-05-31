@@ -1,14 +1,21 @@
 #!/bin/bash
 
 configure_history () {
-    # Dont insert duplicates, or commands beggining with space
-    # configure history size
-    # append to the history file, don't overwrite it
+    #alias hh=hstr                    # hh to be alias for hstr
+    #export HSTR_CONFIG=hicolor       # get more colors
+    shopt -s histappend              # append new history items to .bash_history
+    export HISTCONTROL=ignorespace   # leading space hides commands from history
+    export HISTFILESIZE=10000        # increase history file size (default is 500)
+    export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
 
-    export HISTCONTROL=ignoredups:ignorespace
-    export HISTSIZE=1000000
-    export HISTFILESIZE=2000000
-    shopt -s histappend
+    # ensure synchronization between Bash memory and history file
+    #export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+
+    # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
+    #if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+
+    # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+    #if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 }
 
 configure_bash () {
@@ -78,6 +85,43 @@ configure_gcloud () {
     fi
 }
 
+configure_npm () {
+    export PATH="$PATH:$HOME/.npm-packages/bin"
+}
+
+configure_serverless () {
+    NODE_MODULES="~/.npm-packages/lib/node_modules/"
+    # tabtab source for serverless package
+    # uninstall by removing these lines or running `tabtab uninstall serverless`
+    [ -f $NODE_MODULES/serverless/node_modules/tabtab/.completions/serverless.bash ] && . $NODE_MODULES/serverless/node_modules/tabtab/.completions/serverless.bash
+
+    # tabtab source for sls package
+    # uninstall by removing these lines or running `tabtab uninstall sls`
+    [ -f $NODE_MODULES/serverless/node_modules/tabtab/.completions/sls.bash ] && . $NODE_MODULES/serverless/node_modules/tabtab/.completions/sls.bash
+}
+
+configure_python () {
+    export PYTHONIOENCODING=utf_8
+    export PYTHONDONTWRITEBYTECODE=1
+    export PYTHONPATH="${PYTHONPATH}:"
+    export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+    export WHEELHOUSE="${HOME}/.cache/pip/wheelhouse"
+    export PIP_FIND_LINKS="file://${WHEELHOUSE}/"
+    export PIP_WHEEL_DIR="${WHEELHOUSE}"
+}
+
+configure_go () {
+    export GOPATH=$HOME/workspace/go
+    export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+}
+
+configure_pyenv () {
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PATH:$PYENV_ROOT/bin"
+    eval "$(pyenv init -)"
+    # eval "$(pyenv virtualenv-init -)"
+    . $PYENV_ROOT/completions/pyenv.bash
+}
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -86,11 +130,20 @@ configure_shell
 configure_history
 configure_bash
 configure_ssh_agent
-configure_gcloud
+configure_npm
+configure_serverless
+configure_python
+configure_go
+configure_pyenv
+# configure_gcloud
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/david/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+export NVM_DIR="$HOME/.nvm"
+export PIPENV_VERBOSITY=-1
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /home/david/workspace/prophesea/data-ingestion/node_modules/tabtab/.completions/slss.bash ] && . /home/david/workspace/prophesea/data-ingestion/node_modules/tabtab/.completions/slss.bash

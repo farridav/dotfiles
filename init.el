@@ -12,7 +12,7 @@
 (package-initialize)
 
 ;; automatically use anaconda mode for python
-(add-hook 'python-mode-hook 'anaconda-mode)
+;(add-hook 'python-mode-hook 'anaconda-mode)
 
 ;; get rid of trailing whitespace
 (defvar do-delete-trailing-whitespace t)
@@ -25,7 +25,7 @@
               tab-width 4)
 
 ;; make {copy, cut, paste, undo} have {C-c, C-x, C-v, C-z} keys
-(cua-mode 1)
+; (cua-mode 1)
 
 ;; automatically insert matching brackets
 (electric-pair-mode 1)
@@ -71,16 +71,23 @@
  ;; If there is more than one, they won't work right.
  )
 
-(defun python-add-breakpoint ()
-  (interactive)
+;(defun python-add-breakpoint ()
+;  (interactive)
 ;;  (py-newline-and-indent)
-  (insert "import ipdb; ipdb.set_trace()")
-  (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
+;  (insert "import ipdb; ipdb.set_trace()")
+;  (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
 
-;;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
+;(define-key py-mode-map (kbd "C-c C-t") 'python-add-breakpoint)
 
 (menu-bar-mode -1)
 
 ;; Forces the messages to 0, and kills the *Messages* buffer - thus disabling it on startup.
 (setq-default message-log-max nil)
 (kill-buffer "*Messages*")
+
+(defvar myPackages
+  '(better-defaults
+    elpy ;; add the elpy package
+    material-theme))
+
+;(elpy-enable)

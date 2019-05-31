@@ -1,5 +1,7 @@
 {
+	"font_size": 14,
 	"always_show_minimap_viewport": true,
+	"auto_complete": false,
 	"auto_complete_commit_on_tab": true,
 	"auto_complete_cycle": true,
 	"auto_complete_triggers":
@@ -28,9 +30,12 @@
 		"*.zip",
 		".coverage",
 		".storage/**",
+		".tox/**",
+		".venv/**",
 		"__pycache__/**"
 	],
 	"bold_folder_labels": true,
+	"color_scheme": "Packages/Theme - Flatland/Flatland Monokai.tmTheme",
 	"copy_with_empty_selection": false,
 	"create_window_at_startup": false,
 	"draw_minimap_border": true,
@@ -62,6 +67,8 @@
 		"\\.*",
 		".*~"
 	],
+	"flatland_sidebar_tree_xsmall": false,
+	"flatland_square_tabs": true,
 	"folder_exclude_patterns":
 	[
 		".svn",
@@ -70,12 +77,12 @@
 		"CVS",
 		".venv"
 	],
-	"font_size": 10,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"RestructuredText",
+		"Tag",
 		"Vintage"
 	],
 	"indent_guide_options":
@@ -95,7 +102,7 @@
 	],
 	"show_full_path": true,
 	"tab_size": 4,
-	"theme": "Cobalt2.sublime-theme",
+	"theme": "Flatland Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false

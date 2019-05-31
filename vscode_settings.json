@@ -1,0 +1,38 @@
+{
+    "files.autoSave": "on",
+    "editor.codeActionsOnSave": {},
+    "editor.dragAndDrop": false,
+    "editor.emptySelectionClipboard": false,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+    "editor.rulers": [
+        120
+    ],
+    "editor.showFoldingControls": "always",
+    "editor.smoothScrolling": false,
+    "editor.tabCompletion": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "search.location": "panel",
+    "search.quickOpen.includeSymbols": true,
+    "terminal.external.linuxExec": "i3-sensible-terminal",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "[go]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true
+    },
+    "go.autocompleteUnimportedPackages": true,
+    "go.formatTool": "gofmt",
+    "go.gocodeAutoBuild": true,
+    "go.liveErrors": {
+        "enabled": true,
+        "delay": 500
+    },
+    "go.gopath": "/home/david/workspace/go"
+}

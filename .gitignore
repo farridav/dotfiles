@@ -5,6 +5,6 @@
 .DS_Store
 *.crt
 *ca-bundle
-
+.idea
 Package Control.cache/
 PythonTestRunner.last-run

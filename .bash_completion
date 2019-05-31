@@ -4,21 +4,48 @@ parse_git_remote () {
     git ls-remote --get-url 2> /dev/null | sed s/git@github.com:/https\:\\/\\/github.com\\// | sed s/.git$//
 }
 
-complete_sb () {
-    SB_REPOS='/home/david/workspace/sainsburys'
+complete_workspace () {
+    REPOS='/home/david/workspace/'
+
+    cdw () {
+        if [[ -z "$1" ]]
+        then
+            cd $REPOS/ && ls -1
+        else
+            if [ -d $REPOS/$1 ];
+            then
+                cd $REPOS/$1
+                if [ -f Pipfile ]; then
+                    pipenv shell
+                fi
+            fi
+        fi
+
+    }
+
+    _cdw() {
+        COMPREPLY=()
+        local cur projects
+        projects=$(ls $REPOS)
+        _get_comp_words_by_ref cur
+        COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
+    }
+    complete -F _cdw cdw
+}
+
+complete_sainsburys () {
+    SAINS_REPOS='/home/david/workspace/sainsburys'
 
     cds () {
         if [[ -z "$1" ]]
         then
-            cd $SB_REPOS/ && ls -1
+            cd $SAINS_REPOS/ && ls -1
         else
-            if [ -d $SB_REPOS/$1 ];
+            if [ -d $SAINS_REPOS/$1 ];
             then
-                cd $SB_REPOS/$1
-                if [ -f .venv/bin/activate ]; then
-                    . .venv/bin/activate
-                elif [ -f env/bin/activate ]; then
-                    . env/bin/activate
+                cd $SAINS_REPOS/$1
+                if [ -f Pipfile ]; then
+                    pipenv shell
                 fi
             fi
         fi
@@ -28,11 +55,65 @@ complete_sb () {
     _cds() {
         COMPREPLY=()
         local cur projects
-        projects=$(ls $SB_REPOS)
+        projects=$(ls $SAINS_REPOS)
         _get_comp_words_by_ref cur
         COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
     }
     complete -F _cds cds
+}
+
+complete_prophesea () {
+    PROPHESEA_REPOS='/home/david/workspace/prophesea'
+
+    cdp () {
+        if [[ -z "$1" ]]
+        then
+            cd $PROPHESEA_REPOS/ && ls -1
+        else
+            if [ -d $PROPHESEA_REPOS/$1 ];
+            then
+                cd $PROPHESEA_REPOS/$1
+                if [ -f Pipfile ]; then
+                    pipenv shell
+                fi
+            fi
+        fi
+
+    }
+
+    _cdp() {
+        COMPREPLY=()
+        local cur projects
+        projects=$(ls $PROPHESEA_REPOS)
+        _get_comp_words_by_ref cur
+        COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
+    }
+    complete -F _cdp cdp
+}
+
+complete_android () {
+    ANDROID_REPOS='/home/david/workspace/android'
+
+    cda () {
+        if [[ -z "$1" ]]
+        then
+            cd $ANDROID_REPOS/ && ls -1
+        else
+            if [ -d $ANDROID_REPOS/$1 ];
+            then
+                cd $ANDROID_REPOS/$1
+            fi
+        fi
+    }
+
+    _cda() {
+        COMPREPLY=()
+        local cur projects
+        projects=$(ls $ANDROID_REPOS)
+        _get_comp_words_by_ref cur
+        COMPREPLY=( $(compgen -W "${projects}" -- ${cur}) )
+    }
+    complete -F _cda cda
 }
 
 complete_pr() {
@@ -72,6 +153,43 @@ complete_gm () {
     complete -F _gm gm
 }
 
-complete_sb
+complete_mon () {
+    mon () {
+        AA=$(xrandr | grep -i "^DP-1 connected")
+        CONNECTED=$?
+
+        if [[ -f "$HOME/.screenlayout/$1.sh" ]]; then
+
+            if [ $CONNECTED -ne 0 ]; then
+                echo "Not Connected"
+                echo "Reverting to normal screen layout"
+                . $HOME/.screenlayout/default_primary.sh
+            else
+                echo "Activating $1"
+                . "$HOME/.screenlayout/$1.sh"
+            fi
+
+        else
+            echo "Reverting to normal screen layout"
+            . $HOME/.screenlayout/default_primary.sh
+        fi
+    }
+
+    _mon () {
+        COMPREPLY=()
+        local cur mon_files
+        mon_files=$(ls $HOME/.screenlayout/ | sed "s/\.sh//g")
+        _get_comp_words_by_ref cur
+        COMPREPLY=( $(compgen -W "${mon_files}" -- ${cur}) )
+    }
+
+    complete -F _mon mon
+}
+
+complete_sainsburys
+complete_workspace
+complete_android
 complete_pr
 complete_gm
+complete_mon
+complete_prophesea

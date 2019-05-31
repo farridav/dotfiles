@@ -8,7 +8,7 @@
     "auto_python_builder_enabled": false,
     "complete_parameters": true,
     "complete_all_parameters": false,
-    "auto_project_switch": false,
+    "auto_project_switch": true,
     "mccabe_threshold": 2,
     "anaconda_linting_behaviour": "save-only",
     "validate_imports": true,

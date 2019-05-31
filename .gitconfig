@@ -1,6 +1,7 @@
 [user]
     email = info@davidfarrington.co.uk
     name = David Farrington
+	signingkey = E4468B6958E517F0
 
 [alias]
     dish = diff --staged
@@ -19,12 +20,13 @@
     udiff = diff HEAD...origin/master
     rssub = submodule update --init
     rs  = "!f(){ git fetch -p && git reset --hard origin/`git rev-parse --abbrev-ref HEAD`; }; f"
-    cb  = "!f(){ git fetch -p && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; }; f"
+    cb  = "!f(){ git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d; }; f"
     fu  = "!f(){ git commit -a --fixup HEAD && git push origin `git rev-parse --abbrev-ref HEAD`; }; f"
     am  = "!f(){ git add -u && git commit --amend && git push origin `git rev-parse --abbrev-ref HEAD` --force; }; f"
     boo = "!f(){ git add -u && git commit --amend && git push origin --force; }; f"
     su  = "!f(){ git branch --set-upstream-to=origin/`git rev-parse --abbrev-ref HEAD` `git rev-parse --abbrev-ref HEAD`; }; f"
     wip = "!f(){ git status --porcelain | awk '{ print $2 }'; }; f"
+    prb = "!f(){ git pull --rebase origin `git rev-parse --abbrev-ref HEAD`}; f"
 
 [push]
     default = current
@@ -37,3 +39,17 @@
 
 [core]
     excludesfile = '~/.gitignore'
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
+[commit]
+	# gpgsign = true
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true

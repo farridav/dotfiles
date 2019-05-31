@@ -6,31 +6,10 @@
 	"installed_packages":
 	[
 		"Anaconda",
-		"AutoSpell",
-		"ColorSchemeSelector",
-		"Dark Neon Color Scheme",
-		"Djaneiro",
-		"Django",
-		"EditorConfig",
-		"GitGutter",
-		"GitHubinator",
-		"HTMLBeautify",
-		"INI",
-		"Jinja2",
 		"Package Control",
-		"Pretty JSON",
-		"Python Improved",
-		"Python Output Format",
-		"PyYapf Python Formatter",
-		"requirementstxt",
+		"Scratch",
 		"SideBarEnhancements",
-		"SortBy",
-		"SuperPython",
-		"Tag",
-		"Theme - Afterglow",
-		"Theme - Cobalt2",
-		"Theme - Curiosity",
-		"Theme - Soda",
-		"Todo"
+		"SublimeLinter",
+		"SublimeLinter-pycodestyle"
 	]
 }
